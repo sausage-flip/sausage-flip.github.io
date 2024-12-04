@@ -98,6 +98,31 @@
         padding: 5px;
         border-bottom: 1px solid #ddd;
       }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .pagination button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .pagination button.active {
+        background-color: #45a049;
+      }
+
+      .pagination button:hover {
+        background-color: #3e8e41;
+      }
     </style>
   </head>
   <body>
@@ -116,10 +141,11 @@
       <div class="leaderboard">
         <h2>Bảng Vàng</h2>
         <ul id="leaderboard"></ul>
+        <div class="pagination" id="pagination"></div>
       </div>
     </div>
     <script>
-      const API_URL = "https://vongquay.onrender.com"; // Địa chỉ server API
+      const API_URL = "https://vongquay.onrender.com";
 
       const canvas = document.getElementById("wheelCanvas");
       const ctx = canvas.getContext("2d");
@@ -128,6 +154,7 @@
       const playerNameInput = document.getElementById("playerName");
       const addPlayerButton = document.getElementById("addPlayerButton");
       const leaderboard = document.getElementById("leaderboard");
+      const pagination = document.getElementById("pagination");
 
       const segments = [
         "100 điểm",
@@ -148,10 +175,12 @@
         "#E74C3C",
       ];
 
+      const playersPerPage = 3;
       let players = {};
       let userIP = null;
       let spinning = false;
       let currentAngle = 0;
+      let currentPage = 1;
 
       async function getUserIP() {
         try {
@@ -274,13 +303,62 @@
             rank: index + 1,
             name: player.name,
             score: player.score,
+            ip,
           }));
 
-        sortedPlayers.forEach((player) => {
+        const startIndex = (currentPage - 1) * playersPerPage;
+        const endIndex = Math.min(
+          startIndex + playersPerPage,
+          sortedPlayers.length
+        );
+
+        for (let i = startIndex; i < endIndex; i++) {
+          const player = sortedPlayers[i];
           const li = document.createElement("li");
           li.textContent = `${player.rank}. ${player.name}: ${player.score} điểm`;
           leaderboard.appendChild(li);
-        });
+        }
+
+        updatePagination(sortedPlayers.length);
+
+        // Xác định thứ hạng của người chơi hiện tại
+        const currentPlayer = sortedPlayers.find(
+          (player) => player.ip === userIP
+        );
+        const rankInfo = document.createElement("div");
+
+        if (currentPlayer) {
+          rankInfo.textContent = `Bạn đang xếp thứ ${currentPlayer.rank}`;
+        } else {
+          rankInfo.textContent = "Bạn chưa có thứ hạng trên bảng vàng.";
+        }
+
+        rankInfo.style.marginTop = "10px";
+        rankInfo.style.fontWeight = "bold";
+        leaderboard.appendChild(rankInfo); // Thêm thông báo dưới danh sách bảng vàng
+      }
+
+      function updatePagination(totalPlayers) {
+        pagination.innerHTML = "";
+        const totalPages = Math.ceil(totalPlayers / playersPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i;
+          button.className = i === currentPage ? "active" : "";
+          button.addEventListener("click", () => {
+            currentPage = i;
+            updateLeaderboard();
+          });
+
+          pagination.appendChild(button);
+        }
+
+        const pageInfo = document.createElement("div");
+        pageInfo.textContent = `Trang ${currentPage} / ${totalPages}`;
+        pageInfo.style.marginTop = "10px";
+        pageInfo.style.fontWeight = "bold";
+        pagination.appendChild(pageInfo);
       }
 
       function drawWheel() {
