@@ -98,42 +98,6 @@
         padding: 5px;
         border-bottom: 1px solid #ddd;
       }
-
-      .pagination {
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-        margin-top: 10px;
-      }
-
-      .pagination button {
-        padding: 5px 10px;
-        border: none;
-        background-color: #4caf50;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .pagination button.active {
-        background-color: #45a049;
-      }
-
-      .pagination button:hover {
-        background-color: #3e8e41;
-      }
-
-      #nameInputContainer {
-        margin-top: 20px;
-      }
-
-      #nameInputContainer input {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
     </style>
   </head>
   <body>
@@ -152,10 +116,11 @@
       <div class="leaderboard">
         <h2>Bảng Vàng</h2>
         <ul id="leaderboard"></ul>
-        <div class="pagination" id="pagination"></div>
       </div>
     </div>
     <script>
+      const API_URL = "http://localhost:3000"; // Địa chỉ server API
+
       const canvas = document.getElementById("wheelCanvas");
       const ctx = canvas.getContext("2d");
       const spinButton = document.getElementById("spinButton");
@@ -163,7 +128,6 @@
       const playerNameInput = document.getElementById("playerName");
       const addPlayerButton = document.getElementById("addPlayerButton");
       const leaderboard = document.getElementById("leaderboard");
-      const pagination = document.getElementById("pagination");
 
       const segments = [
         "100 điểm",
@@ -184,12 +148,10 @@
         "#E74C3C",
       ];
 
-      const playersPerPage = 5;
       let players = {};
       let userIP = null;
       let spinning = false;
       let currentAngle = 0;
-      let currentPage = 1;
 
       async function getUserIP() {
         try {
@@ -208,44 +170,75 @@
         }
       }
 
-      addPlayerButton.addEventListener("click", () => {
+      async function fetchPlayersFromServer() {
+        try {
+          const response = await fetch(`${API_URL}/players`);
+          players = await response.json();
+          updateLeaderboard();
+        } catch (error) {
+          console.error("Không thể tải dữ liệu người chơi:", error);
+        }
+      }
+
+      async function savePlayerToServer(ip, name, score) {
+        try {
+          const response = await fetch(`${API_URL}/players`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ip, name, score }),
+          });
+          const data = await response.json();
+          players = data.players;
+          updateLeaderboard();
+        } catch (error) {
+          console.error("Không thể lưu người chơi:", error);
+        }
+      }
+
+      window.onload = async () => {
+        await fetchPlayersFromServer();
+        await getUserIP();
+      };
+
+      addPlayerButton.addEventListener("click", async () => {
         const playerName = playerNameInput.value.trim();
         if (playerName && !players[userIP]) {
-          players[userIP] = { name: playerName, score: 0 };
+          await savePlayerToServer(userIP, playerName, 0);
           spinButton.disabled = false;
           addPlayerButton.disabled = true;
           playerNameInput.disabled = true;
-          updateLeaderboard();
           resultDiv.textContent = `Chào mừng ${playerName}! Hãy quay để bắt đầu.`;
         } else {
           alert("Tên không hợp lệ hoặc IP đã được đăng ký!");
         }
       });
 
-      spinButton.addEventListener("click", () => {
+      spinButton.addEventListener("click", async () => {
         if (spinning || !players[userIP]) return;
 
         spinning = true;
         const spinDuration = 3000;
-        const spins = 5;
         const randomAngle = Math.random() * (2 * Math.PI);
-        const endAngle = currentAngle + spins * (2 * Math.PI) + randomAngle;
+        const endAngle = currentAngle + 10 * (2 * Math.PI) + randomAngle;
 
         const startTime = performance.now();
-        const startAngle = currentAngle; // Thêm dòng này
 
         function animate() {
           const elapsed = performance.now() - startTime;
           if (elapsed >= spinDuration) {
             spinning = false;
             currentAngle = endAngle % (2 * Math.PI);
-            showResult(currentAngle);
+            const score = calculateScore(currentAngle);
+            updateScore(score);
             return;
           }
 
           const progress = elapsed / spinDuration;
           const easedProgress = 1 - Math.pow(1 - progress, 3);
-          currentAngle = startAngle + (endAngle - startAngle) * easedProgress;
+          currentAngle =
+            currentAngle + (endAngle - currentAngle) * easedProgress;
 
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           drawWheel();
@@ -255,7 +248,12 @@
         animate();
       });
 
-      function showResult(angle) {
+      async function updateScore(score) {
+        await savePlayerToServer(userIP, players[userIP].name, score);
+        resultDiv.textContent = `${players[userIP].name} quay được: ${score} điểm`;
+      }
+
+      function calculateScore(angle) {
         const arcAngle = (2 * Math.PI) / segments.length;
         const adjustedAngle =
           (2 * Math.PI - angle + Math.PI / 2) % (2 * Math.PI);
@@ -263,12 +261,9 @@
         const result = segments[index];
 
         if (result.includes("điểm")) {
-          const points = parseInt(result.split(" ")[0]);
-          players[userIP].score += points;
+          return parseInt(result.split(" ")[0]);
         }
-
-        resultDiv.textContent = `${players[userIP].name} quay được: ${result}`;
-        updateLeaderboard();
+        return 0;
       }
 
       function updateLeaderboard() {
@@ -281,37 +276,11 @@
             score: player.score,
           }));
 
-        const startIndex = (currentPage - 1) * playersPerPage;
-        const endIndex = Math.min(
-          startIndex + playersPerPage,
-          sortedPlayers.length
-        );
-
-        for (let i = startIndex; i < endIndex; i++) {
-          const player = sortedPlayers[i];
+        sortedPlayers.forEach((player) => {
           const li = document.createElement("li");
           li.textContent = `${player.rank}. ${player.name}: ${player.score} điểm`;
           leaderboard.appendChild(li);
-        }
-
-        updatePagination(sortedPlayers.length);
-      }
-
-      function updatePagination(totalPlayers) {
-        pagination.innerHTML = "";
-        const totalPages = Math.ceil(totalPlayers / playersPerPage);
-
-        for (let i = 1; i <= totalPages; i++) {
-          const button = document.createElement("button");
-          button.textContent = i;
-          button.className = i === currentPage ? "active" : "";
-          button.addEventListener("click", () => {
-            currentPage = i;
-            updateLeaderboard();
-          });
-
-          pagination.appendChild(button);
-        }
+        });
       }
 
       function drawWheel() {
@@ -343,7 +312,6 @@
       }
 
       drawWheel();
-      getUserIP();
     </script>
   </body>
 </html>
