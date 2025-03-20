@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            height: 85vh;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h2 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .room-info {
+            padding: 12px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .room-info h3 {
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .room-info .back-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 8px 15px;
+            text-transform: none;
+            box-shadow: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .room-info .back-btn:hover {
+            transform: none;
+            box-shadow: none;
+            color: #764ba2;
+        }
+
+        .user-info {
+            padding: 12px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            position: relative;
+            align-items: center;
+        }
+
+        .user-info input {
+            max-width: 200px;
+        }
+
+        .user-info .error-message {
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            color: #dc3545;
+            font-size: 13px;
+            display: none;
+        }
+
+        .user-info .error-message.show {
+            display: block;
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            margin-bottom: 5px;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+            position: relative;
+            animation: fadeIn 0.3s ease-in-out;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.sent {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.received {
+            background-color: white;
+            color: #333;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .chat-input {
+            padding: 15px 20px;
+            background-color: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            opacity: 0.5;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 13px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .system-message {
+            text-align: center;
+            color: #666;
+            margin: 10px 0;
+            font-style: italic;
+            font-size: 13px;
+            background-color: #f8f9fa;
+            padding: 6px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #666;
+            margin: 20px 0;
+            font-size: 14px;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Custom scrollbar */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            
+            .chat-container {
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat-header {
+                border-radius: 0;
+                padding: 12px 15px;
+            }
+
+            .message {
+                max-width: 85%;
+                padding: 8px 12px;
+            }
+
+            .user-info input {
+                max-width: 150px;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat Room</h2>
+        </div>
+        <div class="room-info">
+            <h3 id="roomName">Đang tải...</h3>
+            <button class="back-btn" onclick="window.location.href='1.html'">← Quay lại</button>
+        </div>
+        <div class="user-info">
+            <input type="text" id="username" placeholder="Nhập tên của bạn" onkeypress="if(event.key === 'Enter') setUsername();">
+            <button onclick="setUsername()">Đặt tên</button>
+            <div class="error-message" id="usernameError">Vui lòng nhập tên của bạn</div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">Chào mừng đến với Chat Room! Vui lòng nhập tên của bạn để bắt đầu chat.</div>
+        </div>
+        <div class="chat-input" id="chatInput">
+            <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." onkeypress="if(event.key === 'Enter') sendMessage();">
+            <button onclick="sendMessage()">Gửi</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref, push, onChildAdded, onValue, set, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        let username = null;
+        let currentRoom = null;
+        const chatInput = document.getElementById('chatInput');
+        const usernameError = document.getElementById('usernameError');
+        const welcomeMessage = document.querySelector('.welcome-message');
+        const roomNameElement = document.getElementById('roomName');
+
+        // Lấy room ID từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomId = urlParams.get('room');
+
+        if (!roomId) {
+            window.location.href = '1.html';
+        }
+
+        window.onload = function() {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageInput = document.getElementById('messageInput');
+
+            // Lấy thông tin phòng
+            onValue(ref(database, `rooms/${roomId}`), (snapshot) => {
+                const room = snapshot.val();
+                if (room) {
+                    currentRoom = room;
+                    roomNameElement.textContent = room.name;
+                } else {
+                    alert('Không tìm thấy phòng chat!');
+                    window.location.href = '1.html';
+                }
+            });
+
+            window.setUsername = function() {
+                const usernameInput = document.getElementById('username');
+                const name = usernameInput.value.trim();
+                
+                if (name === '') {
+                    usernameError.classList.add('show');
+                    return;
+                }
+
+                usernameError.classList.remove('show');
+                username = name;
+                usernameInput.disabled = true;
+                document.querySelector('.user-info button').disabled = true;
+                
+                // Kích hoạt khung chat
+                chatInput.classList.add('active');
+                welcomeMessage.style.display = 'none';
+
+                // Cập nhật số người dùng trong phòng
+                set(ref(database, `rooms/${roomId}/userCount`), increment(1));
+
+                // Thông báo người dùng mới tham gia
+                push(ref(database, `rooms/${roomId}/messages`), {
+                    text: `${username} đã tham gia chat`,
+                    type: 'system',
+                    timestamp: Date.now()
+                });
+            }
+
+            function addMessage(data) {
+                const messageDiv = document.createElement('div');
+                if (data.type === 'system') {
+                    messageDiv.className = 'system-message';
+                    messageDiv.textContent = data.text;
+                } else if (data.username === username) {
+                    messageDiv.className = 'message sent';
+                    messageDiv.textContent = data.text;
+                } else {
+                    messageDiv.className = 'message received';
+                    messageDiv.textContent = `${data.username}: ${data.text}`;
+                }
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            window.sendMessage = function() {
+                if (!username) {
+                    usernameError.classList.add('show');
+                    return;
+                }
+
+                const message = messageInput.value.trim();
+                if (message !== '') {
+                    // Cập nhật số tin nhắn trong phòng
+                    set(ref(database, `rooms/${roomId}/messageCount`), increment(1));
+
+                    // Gửi tin nhắn
+                    push(ref(database, `rooms/${roomId}/messages`), {
+                        text: message,
+                        username: username,
+                        timestamp: Date.now()
+                    });
+                    messageInput.value = '';
+                }
+            }
+
+            // Lắng nghe tin nhắn mới trong phòng
+            onChildAdded(ref(database, `rooms/${roomId}/messages`), (snapshot) => {
+                const data = snapshot.val();
+                addMessage(data);
+            });
+
+            // Xử lý khi người dùng rời khỏi
+            window.addEventListener('beforeunload', () => {
+                if (username && currentRoom) {
+                    // Giảm số người dùng trong phòng
+                    set(ref(database, `rooms/${roomId}/userCount`), increment(-1));
+
+                    // Thông báo người dùng rời khỏi
+                    push(ref(database, `rooms/${roomId}/messages`), {
+                        text: `${username} đã rời khỏi chat`,
+                        type: 'system',
+                        timestamp: Date.now()
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
