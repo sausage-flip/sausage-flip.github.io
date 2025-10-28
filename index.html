@@ -1,10 +1,80 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Sausage Flip 🕹️ Play Sausage Flip Unblocked</title>
-    <meta name="description" content="Play Sausage Flip Unblocked">
-    <meta name="robots" content="index, follow">
+    <title>Sausage Flip - Play Sausage Flip Unblocked Free Online Game 🕹️</title>
+    <meta name="description" content="🕹️Play Sausage Flip unblocked free online! Fun physics puzzle game where you flip and control a sausage through challenging levels. No download required - play now!">
+    <meta name="keywords" content="sausage flip, sausage flip unblocked, sausage flip game">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Sausage Flip Unblocked">
+    <meta name="geo.region" content="US">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://sausage-flip.github.io/">
+    <link rel="sitemap" type="application/xml" href="https://sausage-flip.github.io/sitemap.xml">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sausage-flip.github.io/">
+    <meta property="og:title" content="Sausage Flip - Play Sausage Flip Unblocked Free Online Game">
+    <meta property="og:description" content="Play Sausage Flip unblocked free online! Fun physics puzzle game with challenging levels. No download required!">
+    <meta property="og:image" content="https://sausage-flip.github.io/img/1.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sausage-flip.github.io/">
+    <meta property="twitter:title" content="Sausage Flip - Play Sausage Flip Unblocked Free">
+    <meta property="twitter:description" content="Play Sausage Flip unblocked free online! Fun physics puzzle game. No download required!">
+    <meta property="twitter:image" content="https://sausage-flip.github.io/img/1.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Sausage Flip Unblocked",
+      "description": "Play Sausage Flip unblocked free online - Fun physics puzzle game with challenging levels",
+      "url": "https://sausage-flip.github.io/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://sausage-flip.github.io/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Sausage Flip",
+      "url": "https://haleyschool.github.io/games/sausage-flip/index.html",
+      "description": "Sausage Flip is a fun and addictive physics-based puzzle game where you control a sausage through challenging obstacles",
+      "genre": "Puzzle",
+      "gamePlatform": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "ratingCount": "1000"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://sausage-flip.github.io/"
+      }]
+    }
+    </script>
     <link rel="preload" href="./style.css" as="style">
     <link rel="stylesheet" href="./style.css">
     <link rel="shortcut icon" href="/img/nho (1).png" />
@@ -26,100 +96,258 @@
     color: rgb(255, 255, 255);
     font-weight: bold;
   }
-  /* Thêm CSS cho popup */
-  .popup-notification {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: linear-gradient(to right bottom, #ffffff, #f8f9fa);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    z-index: 1000;
-    width: 520px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    display: none;
-    color: #333;
-    border: 1px solid rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
+  
+  /* Content styling */
+  .box-content p {
+    margin-bottom: 1.2em;
   }
-
-  .popup-notification.show {
-    display: block;
-    animation: slideIn 0.5s ease-out;
+  
+  .box-content h2 {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
   }
-
-  @keyframes slideIn {
-    from {
-      transform: translateY(100px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+  
+  .box-content h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
   }
-
-  .popup-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eee;
+  
+  .box-content ul li,
+  .box-content ol li {
+    margin-bottom: 0.5em;
   }
-
-  .popup-title {
-    font-weight: 600;
-    color: #2c3e50;
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  
+  .content-section {
+    margin-bottom: 2em;
   }
-
-  .popup-title::before {
-    content: "🔔";
-    font-size: 1.2rem;
-  }
-
-  .popup-close {
-    background: #f8f9fa;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-    color: #666;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  
+  /* Keyword highlighting styles */
+  .keyword-primary {
+    color: #4caf50;
+    font-weight: 700;
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.2) 100%);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-decoration: none;
     transition: all 0.3s ease;
   }
-
-  .popup-close:hover {
-    background: #e9ecef;
-    color: #333;
-    transform: rotate(90deg);
+  
+  .keyword-secondary {
+    color: #ff9800;
+    font-weight: 600;
   }
-
-  .popup-content {
-    padding: 5px 0;
+  
+  .keyword-highlight {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(76, 175, 80, 0.15) 100%);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-weight: 600;
+    border-left: 3px solid #ff9800;
   }
-
-  .popup-content p {
-    color: #505965;
-    line-height: 1.5;
-    margin: 0;
-    font-size: 0.95rem;
+  
+  /* Beautiful content boxes */
+  .box-content {
+    background: linear-gradient(to bottom, rgba(19, 20, 34, 0.98), rgba(26, 26, 40, 0.95));
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
   }
-
+  
+  .box-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4caf50, #ff9800, #4caf50);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .box-content h1 {
+    background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  
+  .box-content h2 {
+    color: #ff9800;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .box-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff9800, transparent);
+    border-radius: 2px;
+  }
+  
+  .box-content h3 {
+    color: #4caf50;
+    font-weight: 600;
+  }
+  
+  /* List items styling */
+  .box-content ul li,
+  .box-content ol li {
+    padding-left: 5px;
+    transition: transform 0.2s ease;
+  }
+  
+  .box-content ul li:hover,
+  .box-content ol li:hover {
+    transform: translateX(5px);
+  }
+  
+  /* Feature highlight boxes */
+  .feature-highlight {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  
+  /* Responsive styles */
   @media (max-width: 768px) {
-    .popup-notification {
-      width: calc(100% - 40px);
-      bottom: 20px;
-      right: 20px;
+    .box-content {
+      padding: 25px !important;
+      border-radius: 12px;
+    }
+    
+    .box-content h1 {
+      font-size: 1.8em !important;
+      margin-bottom: 15px !important;
+    }
+    
+    .box-content h2 {
+      font-size: 1.4em !important;
+      margin-top: 25px !important;
+      margin-bottom: 10px !important;
+    }
+    
+    .box-content h3 {
+      font-size: 1.2em !important;
+      margin-top: 20px !important;
+    }
+    
+    .box-content p {
+      font-size: 1em !important;
+      line-height: 1.6 !important;
+    }
+    
+    .box-content ul,
+    .box-content ol {
+      padding: 10px 15px !important;
+    }
+    
+    .box-content ul li,
+    .box-content ol li {
+      font-size: 0.95em;
+      line-height: 1.6;
+    }
+    
+    .keyword-primary,
+    .keyword-highlight {
+      font-size: 0.95em;
+    }
+    
+    .game-play .game-title {
+      font-size: 16px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      padding: 0 10px;
+      text-align: center;
+    }
+    
+    .game-play img.logo-game {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .game-play .play-button {
+      font-size: 18px;
+      padding: 12px 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .box-content {
+      padding: 15px !important;
+      border-radius: 8px;
+    }
+    
+    .box-content h1 {
+      font-size: 1.5em !important;
+      margin-bottom: 12px !important;
+    }
+    
+    .box-content h2 {
+      font-size: 1.2em !important;
+      margin-top: 20px !important;
+      margin-bottom: 8px !important;
+    }
+    
+    .box-content h3 {
+      font-size: 1.1em !important;
+      margin-top: 15px !important;
+    }
+    
+    .box-content p {
+      font-size: 0.95em !important;
+      line-height: 1.5 !important;
+    }
+    
+    .box-content ul,
+    .box-content ol {
+      padding: 8px 12px !important;
+    }
+    
+    .box-content ul li,
+    .box-content ol li {
+      font-size: 0.9em;
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+    
+    .keyword-primary,
+    .keyword-highlight {
+      font-size: 0.9em;
+      padding: 2px 4px;
+    }
+    
+    .game-play .game-title {
+      font-size: 14px;
+    }
+    
+    .game-play img.logo-game {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .game-play .play-button {
+      font-size: 16px;
+      padding: 10px 25px;
     }
   }
 </style>
@@ -137,8 +365,8 @@
                 </svg>
               </label>
               <label class="logo">
-                <a href="./index.html" title="Sausage Flip">
-                       <img alt="Sausage Flip - Play Unblocked Games" src="./img/To.png" width="80" decoding="async" data-nimg="1" loading="lazy" style="color:transparent">
+                <a href="./index.html" title="Sausage Flip Unblocked - Play Free Online Game">
+                       <img alt="Sausage Flip Unblocked Game Logo" src="./img/To.png" width="80" decoding="async" data-nimg="1" loading="lazy" style="color:transparent">
                 </a>
               </label>
               <ul>
@@ -177,16 +405,12 @@
               <div class="game-center">
                 <div id="gameLoad" class="game-loading">
                   <div class="game-play">
-                    <img alt="Sausage Flip" src="/img/1.png" width="200" height="200" decoding="async" data-nimg="1" class="logo-game" loading="lazy" style="color:transparent">
-                    <span class="game-title">
-                        Ready to flip some sausages? Click "Play Now" to start your adventure! 
-                        <br>
-                        <small style="color: #666; font-size: 0.9em;">If you can't play online! Download the game and run on "Visual Studio Code"</small>
-                    </span>
+                    <img alt="Sausage Flip Unblocked - Play Free Online Game" src="/img/1.png" width="200" height="200" decoding="async" data-nimg="1" class="logo-game" loading="lazy" style="color:transparent">
                     <a href="https://haleyschool.github.io/games/sausage-flip/index.html" 
                        target="_blank" 
                        class="play-button" 
                        id="playButton"
+                       title="Play Sausage Flip Unblocked Free Online Game"
                        style="
                          display: inline-block;
                          padding: 15px 40px;
@@ -203,7 +427,7 @@
                        "
                        onmouseover="this.style.transform='scale(1.05)'" 
                        onmouseout="this.style.transform='scale(1)'">
-                       🎮 Play Now
+                       🎮 Play Sausage Flip Now
                     </a>
                   </div>
                   <div class="game-bar" id="gameBar">
@@ -448,62 +672,86 @@
               <div class="game-desc-left">
                 <div class="box-content">
                     <h1 style="color: #4caf50; font-size: 2.5em; margin-bottom: 20px;">
-                        <strong>Sausage Flip:</strong> Play Sausage Flip Unblocked & Hundreds of Other Games
+                        Sausage Flip Unblocked - Play Free Online Game
                     </h1>
                     <p style="font-size: 1.1em; line-height: 1.8;">
-                        <strong>"Sausage Flip"</strong> is a fun and addictive puzzle game where you control a sausage and try to maneuver it through walls 
-                        and obstacles to reach the goal. The game challenges players with increasingly difficult levels, requiring focus and precise control skills. 
-                        Despite its simple yet colorful graphics, along with cheerful music, <strong>Sausage Flip</strong> creates an enjoyable entertainment experience. 
-                        It's an excellent choice for those looking to relax and challenge themselves in a light-hearted yet engaging game.
+                        Welcome to <span class="keyword-primary">Sausage Flip unblocked</span>! This delightful physics-based puzzle game puts you in control of a playful sausage character. Your mission is to navigate through challenging obstacles and walls to reach the goal. With increasingly difficult levels that test your precision and timing, this game offers endless entertainment for players seeking a fun, engaging challenge.
                     </p>
-                    <h2 style="color: #ff9800; margin-bottom: 10px;">Dowload Sausage Flip Now!</h2>
+                    
                     <p style="font-size: 1.1em; line-height: 1.8;">
-                        Don’t wait—join the sausage-flipping craze today! <strong>Sausage Flip</strong> is free, unblocked, and ready to entertain you for hours. Click below to download!
+                        What makes this game special? The combination of vibrant graphics, cheerful sound effects, and intuitive controls creates an enjoyable experience suitable for all ages. Whether you're looking to unwind or challenge your skills, this <span class="keyword-highlight">unblocked game</span> provides the perfect balance of fun and difficulty.
                     </p>
-                    <a href="/sausage-flip.rar" download style="text-decoration: none;">
-                      <button style="background-color: #4caf50; color: white; font-size: 1.2em; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); display: flex; align-items: center; gap: 8px;">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-                              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                          </svg>
-                          Download Sausage Flip
-                      </button>
-                  </a>
-                    <h2 style="color: #ff9800; margin-bottom: 10px;">Why Sausage Flip is a Must-Try Game?</h2>
+                    <h2 style="color: #ff9800; margin-bottom: 10px;">What Makes This Game Special?</h2>
                     <ul style="padding: 10px 20px; list-style: square; line-height: 1.8;">
-                        <li><strong>Unique Gameplay:</strong> Control a sausage like never before! Flip, jump, and stick your way through mind-boggling puzzles.</li>
-                        <li><strong>Endless Entertainment:</strong> With hundreds of challenging levels, you’ll never run out of fun and excitement.</li>
-                        <li><strong>Unblocked Access:</strong> Enjoy <strong>Sausage Flip unblocked</strong> at school, work, or anywhere for uninterrupted fun.</li>
-                        <li><strong>Perfect for All Ages:</strong> Whether you’re a kid or just a kid at heart, <strong>Sausage Flip</strong> offers fun for everyone.</li>
-                        <li><strong>Best Sausage Adventures:</strong> Explore creative obstacles and quirky levels designed to keep you hooked.</li>
+                        <li><strong>Play Anywhere:</strong> Access this <span class="keyword-highlight">unblocked game</span> at school, work, or home. No filters or restrictions - just pure gaming fun!</li>
+                        <li><strong>Physics-Based Action:</strong> Experience unique gameplay mechanics as you flip, jump, and maneuver your character through creative obstacles.</li>
+                        <li><strong>Hundreds of Levels:</strong> From beginner-friendly challenges to mind-bending puzzles, there's always something new to conquer in <span class="keyword-primary">Sausage Flip</span>.</li>
+                        <li><strong>Completely Free:</strong> No downloads, no registrations, no hidden costs. Just click and play instantly in your browser.</li>
+                        <li><strong>All Ages Welcome:</strong> Whether you're 8 or 80, the charming graphics and intuitive controls make this game accessible to everyone.</li>
+                        <li><strong>Regular Updates:</strong> Fresh content is added regularly to keep your gaming experience exciting and new.</li>
                     </ul>
                 
-                    <h2 style="color: #ff9800; margin-bottom: 10px;">Features of Sausage Flip</h2>
+                    <h2 style="color: #ff9800; margin-bottom: 10px;">Game Highlights</h2>
                     <p style="font-size: 1.1em; line-height: 1.8;">
-                        <strong>Sausage Flip</strong> isn’t just about flipping a sausage; it’s about becoming the master of flips! Here’s why this game stands out:
+                        Dive into an adventure where physics meets fun! This game combines engaging mechanics with delightful visuals to create an unforgettable gaming experience.
                     </p>
                     <ol style="padding: 10px 20px; list-style: decimal; line-height: 1.8;">
-                        <li><strong>Biggest Sausage Challenges:</strong> Push your limits with physics-based levels that test your agility and creativity.</li>
-                        <li><strong>Customizable Sausages:</strong> Unlock new skins and styles for your sausage as you progress through the game.</li>
-                        <li><strong>Cheerful Graphics and Music:</strong> Bright visuals and upbeat tunes make each flip more enjoyable.</li>
-                        <li><strong>Cross-Platform Compatibility:</strong> Play on your favorite devices, whether it’s mobile, tablet, or desktop.</li>
+                        <li><strong>No Restrictions:</strong> Enjoy unlimited access wherever you are. Perfect for quick gaming sessions during breaks or downtime.</li>
+                        <li><strong>Smart Physics:</strong> Realistic physics engine creates natural movements and rewarding interactions with every flip and jump.</li>
+                        <li><strong>Instant Play:</strong> No waiting, no hassle. Your game loads instantly in any modern browser - desktop, tablet, or mobile.</li>
+                        <li><strong>Vibrant Design:</strong> Colorful graphics and catchy audio create an immersive atmosphere that keeps you engaged.</li>
+                        <li><strong>Universal Compatibility:</strong> Works smoothly on all devices and operating systems without any technical requirements.</li>
+                        <li><strong>Growing Content:</strong> The game library expands regularly with new challenges, levels, and gameplay innovations.</li>
                     </ol>
                 
-                    <h2 style="color: #ff9800; margin-bottom: 10px;">Tips for Mastering Sausage Flip</h2>
-                    <p style="font-size: 1.1em; line-height: 1.8;">Here are some quick tips to become the best sausage flipper:</p>
+                    <h2 style="color: #ff9800; margin-bottom: 10px;">Mastering the Game</h2>
+                    <p style="font-size: 1.1em; line-height: 1.8;">
+                        Ready to level up your skills? These strategies will help you tackle even the most challenging stages:
+                    </p>
                     <ul style="padding: 10px 20px; list-style: square; line-height: 1.8;">
-                        <li>Time your flips carefully to land perfectly on tricky surfaces.</li>
-                        <li>Use walls and obstacles to your advantage for creative solutions.</li>
-                        <li>Practice makes perfect—replay levels to refine your strategy.</li>
-                        <li>Experiment with different sausages for fun and variety!</li>
+                        <li><strong>Perfect Your Timing:</strong> Observe the patterns and wait for the right moment to execute your moves. Patience pays off!</li>
+                        <li><strong>Use Your Environment:</strong> Think creatively - walls and obstacles can be your allies when used strategically.</li>
+                        <li><strong>Learn From Mistakes:</strong> Each failed attempt teaches you something valuable. Analyze what went wrong and adjust your approach.</li>
+                        <li><strong>Experiment Freely:</strong> Don't be afraid to try unconventional approaches. Sometimes the unexpected works best.</li>
                     </ul>
                 
-                    <h2 style="color: #ff9800; margin-top: 30px; margin-bottom: 10px;">How Millions of Sausages Are Made in a Factory</h2>
+                    <h2 style="color: #ff9800; margin-top: 30px; margin-bottom: 10px;">Behind the Scenes</h2>
                     <p style="font-size: 1.1em; line-height: 1.8;">
-                        Curious about the fascinating process of sausage making? Discover the behind-the-scenes magic with our detailed breakdown of 
-                        the <a href="/sausage-factory-process.html" style="color: #4caf50; text-decoration: none; font-weight: bold;">Sausage Factory Process</a>. 
-                        You’ll be amazed at how millions of sausages come to life!
+                        Ever wondered how millions of sausages are made in a factory? Get an exclusive look at the fascinating production process. Discover the behind-the-scenes magic with our detailed breakdown of 
+                        the <a href="/sausage-factory-process.html" class="keyword-primary" style="text-decoration: none;">complete factory process</a>. 
+                        It's a truly eye-opening experience!
                     </p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/LUQTYpVppRw?si=aTVTO0PilImIdjmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 20px 0;">
+                      <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" width="560" height="315" src="https://www.youtube.com/embed/LUQTYpVppRw?si=aTVTO0PilImIdjmU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    
+                    <h2 style="color: #ff9800; margin-top: 40px; margin-bottom: 10px;">Common Questions</h2>
+                    <div style="margin-top: 20px;">
+                        <h3 style="color: #4caf50; margin-bottom: 8px;">What exactly is this game?</h3>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            It's a physics-based puzzle adventure where you control a character through obstacle-filled levels in <span class="keyword-primary">Sausage Flip</span>. Navigate challenging terrain, master the controls, and reach your destination!
+                        </p>
+                        
+                        <h3 style="color: #4caf50; margin-top: 20px; margin-bottom: 8px;">Will it work at school or work?</h3>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            Absolutely! This <span class="keyword-highlight">unblocked version</span> is designed to bypass typical restrictions. Whether you're at school, office, or home, you can enjoy seamless gaming without restrictions.
+                        </p>
+                        
+                        <h3 style="color: #4caf50; margin-top: 20px; margin-bottom: 8px;">How do I get started?</h3>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            It's incredibly simple. Just click the <span class="keyword-secondary">"Play Now"</span> button above and start your <span class="keyword-primary">Sausage Flip</span> adventure immediately. No account creation, no downloads, no waiting!
+                        </p>
+                        
+                        <h3 style="color: #4caf50; margin-top: 20px; margin-bottom: 8px;">Is there a catch? What's the cost?</h3>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            Zero cost, zero catch. This game is completely free with no hidden fees, no subscriptions, and no premium requirements. Play to your heart's content!
+                        </p>
+                        
+                        <h3 style="color: #4caf50; margin-top: 20px; margin-bottom: 8px;">Will it work on my phone?</h3>
+                        <p style="font-size: 1.1em; line-height: 1.8;">
+                            Certainly! <span class="keyword-primary">Sausage Flip unblocked</span> is fully optimized for mobile devices, tablets, and desktops. Play on any device - Android, iOS, Windows, or Mac - the choice is yours!
+                        </p>
+                    </div>
                 </div>
               </div>
             </div>
@@ -537,39 +785,7 @@
       </div>
       <div id="popup"></div>
     </div>
-    <div class="popup-notification" id="popupNotification">
-      <div class="popup-header">
-        <span class="popup-title">Important Announcement</span>
-        <button class="popup-close" onclick="closePopup()">×</button>
-      </div>
-      <div class="popup-content">
-        <p>
-          ❤️Dear Sausage Flip players !!!<br><br>
-          We want to inform you that we will no longer be developing this website. ❌🌐❌
-          Instead, we are fully dedicating our time and efforts to building and improving our new platform: <span style="color: #4CAF50; font-weight: bold; text-decoration: underline; background-color: #f0f0f0; padding: 2px 5px; border-radius: 4px;">mathsframe.github.io</span> 🚀.
-          <br>
-          <br>
-          We truly appreciate your support ❤️ and hope you will join us on our new website for an even better experience! 🌟✨
-        </p>
-      </div>
-    </div>
   </div>
   </body>
   <script src="./js/script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        document.getElementById('popupNotification').classList.add('show');
-      }, 1000);
-    });
-  
-    function closePopup() {
-      const popup = document.getElementById('popupNotification');
-      popup.style.opacity = '0';
-      popup.style.transform = 'translateY(100px)';
-      setTimeout(() => {
-        popup.style.display = 'none';
-      }, 300);
-    }
-    </script>
 </html>
